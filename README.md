@@ -16,6 +16,10 @@ Token counting and summarisation of older messages
 
 Better and simpler Role management
 
-Prompt Engineering Templates, Few Shot, COT, TOT, Knowledge Generation etc
+Prompt generation automation and suggestion
+
+Prompt Engineering Templates, Majority Vote, Supervisor, Few Shot, COT, TOT, Knowledge Generation etc
+
+
 
 Investigate dependency injection frameworks to handle other LLMs
