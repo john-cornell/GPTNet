@@ -14,4 +14,8 @@ Add support for other LLMs
 
 Token counting and summarisation of older messages
 
+Better and simpler Role management
+
+Prompt Engineering Templates, Few Shot, COT, TOT, Knowledge Generation etc
+
 Investigate dependency injection frameworks to handle other LLMs
