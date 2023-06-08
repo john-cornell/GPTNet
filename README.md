@@ -46,7 +46,11 @@ using GPTEngine;
 using GPTEngine.Roles;
 ```
 
-You can define a conversation by creating specific roles. For example, a SupervisorAgentSystem role and a SupervisorAgentAssistant role can be defined by extending the Role class.
+You can define a conversation by creating specific roles. A conversation currently requires 2 roles to be defined, System and Assistant. The System will define to goal of the application you are trying to build, while the assistant describes the goals and means of interaction between the LLM and the user. Generally a system role will be a simplified version of the assistant role.
+
+For example, a SupervisorAgentSystem role and a SupervisorAgentAssistant role can be defined by extending the Role class. 
+
+Alternatively the RoleBehaviour object can be used to simplify this process into a single prompt that will be used for both System and Agent
 
 ```csharp
 public class SupervisorAgentAssistant : Role
