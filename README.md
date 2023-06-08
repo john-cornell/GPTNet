@@ -11,5 +11,7 @@ Currently license is GPL-3, largely to stop people being stupid enough to includ
 
 Next Up:
 Add support for other LLMs
+
 Token counting and summarisation of older messages
+
 Investigate dependency injection frameworks to handle other LLMs
