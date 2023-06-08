@@ -20,13 +20,16 @@ Please feel free to contribute any way you feel you wish
 - [Next Steps](#next-steps)
 
 ## Introduction
-JC.GPT.NET is engineered to ease the integration of language models into your C# applications. With the powerful capabilities of OpenAI's gpt-3.5-turbo at your disposal, you can innovate in creating advanced chat-based applications, virtual assistants, and so much more.
+JC.GPT.NET is engineered to ease the integration of language models into your C# applications, to take the tedious integration steps out of the way, you can innovate in creating advanced chat-based applications, virtual assistants, and so much more.
 
 ## Installation
 To get started with JC.GPT.NET in your C# project, you have two options - download the source code and compile it yourself or simply install the library through NuGet.
 
 ```bash
 # Install via NuGet
+Install-Package JC.GPT.NET
+
+#or
 dotnet add package JC.GPT.NET
 ```
 
