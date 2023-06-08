@@ -2,7 +2,7 @@
 
 Welcome to JC.GPT.NET! 
 
-This is a C# wrapper crafted for language models, at present, specifically focusing on OpenAI's chat models, such as `gpt-3.5-turbo`, where specific System, Assistant and User roles are expected, however we plan to extend this to other models and model types in the near future. 
+This is a C# wrapper crafted for language models, at present, specifically focusing on OpenAI's chat models, such as `gpt-3.5-turbo`, where specific System, Assistant and User roles are expected, however I plan to extend this to other models and model types in the near future. 
 
 As fun as python is to code in, the aim of GPT.NET to assist developers in conveniently integrating powerful language models into their .NET applications. 
 
@@ -96,9 +96,7 @@ Please refer to the project's GitHub repository for detailed examples on definin
 ## Prompt Engineering
 Prompt engineering is all about creating effective prompts to elicit desired responses from language models. JC.GPT.NET allows you to experiment with different prompt engineering strategies to enhance user experiences and customize the model's responses to specific scenarios.
 
-Prompt engineering techniques tailored to JC.GPT.NET are still in active exploration, given the early stage of the library. Keep an eye out for future updates as we fine-tune our approach to optimally utilizing
-
- prompt engineering with this library.
+Prompt engineering techniques tailored to JC.GPT.NET are still in active exploration, given the early stage of the library. Keep an eye out for future updates as I fine-tune optimally utilizing prompt engineering in this library.
 
 ## Contributing
 We warmly welcome contributions to JC.GPT.NET! If you have innovative ideas, bug reports, or feature requests, please don't hesitate to open an issue on the project's GitHub repository. Your feedback and involvement are invaluable to us in enhancing this library.
