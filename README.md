@@ -35,7 +35,7 @@ dotnet add package JC.GPT.NET
 
 ## Usage
 
-Please visit [Boots](https://github.com/john-cornell/Boots) for a reference implementation project. 
+Please visit [Boots](https://github.com/john-cornell/Boots) for a reference implementation project that I will endeavour to keep up to date
 
 Alternatively [GPTAssessorEngine](https://github.com/john-cornell/GPTAssessorEngine) is another fun implementation, using prototype code that was later used in the core of this project, to create a lying lexicographer as a test. Get it to define any nonesense word you wish. Fun for all the family. *That* project, however, is not getting maintained, and was a fairly quick POC so expect it to diverge from this project very quickly. 
 
