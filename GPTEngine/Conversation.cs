@@ -1,10 +1,13 @@
 ﻿using GPTEngine.Roles;
 using System.Collections.ObjectModel;
+using GPTNet.Events;
 
 namespace GPTEngine
 {
     public class Conversation
     {
+        public event EventHandler<GPTMessageEventArgs>? OnMessageAdded;
+
         List<GPTMessage> _messages;
         bool _resetConversationEachMessage;
         public Role System { get; private set; }
@@ -43,22 +46,18 @@ namespace GPTEngine
 
         public void AddMessage(string message)
         {
-            if (_resetConversationEachMessage) ResetMessages();
-
-            if(EnableHistory && History != null) History.Add($"IN ({System.Name}): {message}");  
-
+            if (_resetConversationEachMessage)
+                ResetMessages();
+            
+            OnMessageAdded?.Invoke(message, new GPTMessageEventArgs(System.Name, message, GPTMessageEventArgs.MessageDirection.In));
             _messages.Add(new GPTMessage("user", message));
         }
 
         public void AddReplyFromGPT(string message)
         {
-            if (EnableHistory && History != null) History.Add($"OUT ({System.Name}): {message}");
-
+            OnMessageAdded?.Invoke(message, new GPTMessageEventArgs(System.Name, message, GPTMessageEventArgs.MessageDirection.Out));
             _messages.Add(new GPTMessage("assistant", message));
         }
-
-        public bool EnableHistory { get; set; } = false;
-        public ObservableCollection<string>? History { get; set; }
 
         public GPTMessage[] Data => _messages.ToArray();
     }
