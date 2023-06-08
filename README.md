@@ -35,7 +35,7 @@ dotnet add package JC.GPT.NET
 
 ## Usage
 
-Please visit [Boots](https://github.com/john-cornell/Boots) for a reference implementation project.
+Please visit [Boots](https://github.com/john-cornell/Boots) for a reference implementation project. Alternatively [GPTAssessorEngine](https://github.com/john-cornell/GPTAssessorEngine) is another fun implementation, using prototype code from here, to create a lying lexicographer as a test. Get it to define any nonesense word you wish. Fun for all the family. This project, however, is not getting maintained, and was a fairly quick POC so expect it to diverge from this project very quickly. 
 
 In the JC.GPT.NET framework, conversations are the centerpiece of interactions with language models. For successful operation, roles such as 'System' and 'Assistant' need to be established. You can define these roles as Role objects, or use RoleBehaviour for more personalized interactions.
 
