@@ -8,3 +8,8 @@ I have created https://github.com/john-cornell/Boots/tree/master as an example p
 Package available from Nuget at JC.GPT.NET
 
 Currently license is GPL-3, largely to stop people being stupid enough to include very early software in commercial products. When it is more advanced, I will switch it to something more open. I have no desire to limit its use, just don't want to cause anyone pain.
+
+Next Up:
+Add support for other LLMs
+Token counting and summarisation of older messages
+Investigate dependency injection frameworks to handle other LLMs
