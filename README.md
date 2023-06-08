@@ -1,6 +1,8 @@
 # JC.GPT.NET
 
-Welcome to JC.GPT.NET! This is a C# wrapper crafted for language models, at present, specifically focusing on OpenAI's chat models, such as `gpt-3.5-turbo`, where specific System, Assistant and User roles are expected, however we plan to extend this to other models and model types in the near future. 
+Welcome to JC.GPT.NET! 
+
+This is a C# wrapper crafted for language models, at present, specifically focusing on OpenAI's chat models, such as `gpt-3.5-turbo`, where specific System, Assistant and User roles are expected, however we plan to extend this to other models and model types in the near future. 
 
 As fun as python is to code in, the aim of GPT.NET to assist developers in conveniently integrating powerful language models into their .NET applications. 
 
