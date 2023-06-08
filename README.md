@@ -10,16 +10,16 @@ Package available from Nuget at JC.GPT.NET
 Currently license is GPL-3, largely to stop people being stupid enough to include very early software in commercial products. When it is more advanced, I will switch it to something more open. I have no desire to limit its use, just don't want to cause anyone pain.
 
 Next Up:
-Add support for other LLMs
+* Add support for other LLMs
 
-Token counting and summarisation of older messages
+* Add simplified chat engine that uses Roles already setup for simple start
 
-Better and simpler Role management
+* Token counting and summarisation of older messages
 
-Prompt generation automation and suggestion
+* Better and simpler Role management
 
-Prompt Engineering Templates, Majority Vote, Supervisor, Few Shot, COT, TOT, Knowledge Generation etc
+* Prompt generation automation and suggestion
 
+* Prompt Engineering Templates, Majority Vote, Supervisor, Few Shot, COT, TOT, Knowledge Generation etc
 
-
-Investigate dependency injection frameworks to handle other LLMs
+* Investigate dependency injection frameworks to handle other LLMs
