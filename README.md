@@ -2,7 +2,7 @@
 
 Welcome to JC.GPT.NET! This is a C# wrapper crafted for language models, specifically focusing on chat models like OpenAI's gpt-3.5-turbo. We aim to assist developers in conveniently integrating these powerful language models into their .NET applications. 
 
-Please understand it is still in its very early stages, however, it is actively being built and maintained.
+Please understand it is still in its very early stages, however, both the codebase and this documentation actively being built and maintained.
 
 ## Table of Contents
 - [Introduction](#introduction)
