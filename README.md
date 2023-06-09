@@ -149,3 +149,10 @@ I will happily welcome contributions. If you have innovative ideas, bug reports,
 
 ## License
 JC.GPT.NET is currently licensed under the GPL-3 License. This choice is intended to discourage the integration of this early-stage software into commercial products. However, as the library evolves, we may shift to a more permissive license. Our primary intention is not to limit the use.
+
+## Next Steps
+* Handle more models, open source, huggingface
+* Token counting
+* History trimming and summarisation
+* Add prompt strategies
+* Embeddings
