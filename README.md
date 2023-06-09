@@ -52,7 +52,7 @@ You can define a conversation by creating specific roles. A conversation current
 
 Using the [Boots](https://github.com/john-cornell/Boots) example, we can see how a conversation is created for a developer agent's interactions with the model. A system and an assistant role are defined and passed to the developer conversation. Here the `Conversation` object is being used as a base class, however that is not required if you prefer to us Conversation on its own. This was only done to contain the developer Roles in one place.
 
-```
+```csharp
 public class Developer : Conversation
     {
         public Developer(string task) : base(new DeveloperSystem(task),
@@ -103,7 +103,7 @@ By default, the whole conversation will be sent to GPT, to conserve context, how
 
 Additionally, the Conversation will fire an `OnMessageAdded` event whenever a new message is added to send, or it receives a response from the GPT engine.
 
-```
+```csharp
     developer.OnMessageAdded += (sender, args) => { Application.Current.Dispatcher.Invoke(() => { History.Add(BuildGPTMessageFromEvent(args)); }); };
     supervisor.OnMessageAdded += (sender, args) => { Application.Current.Dispatcher.Invoke(() => { History.Add(BuildGPTMessageFromEvent(args)); }); };```
 
