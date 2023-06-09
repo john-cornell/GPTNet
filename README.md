@@ -54,33 +54,33 @@ Using the [Boots](https://github.com/john-cornell/Boots) example, we can see how
 
 ```csharp
 public class Developer : Conversation
+{
+    public Developer(string task) : base(new DeveloperSystem(task),
+        new DeveloperAssistant(task), false)
     {
-        public Developer(string task) : base(new DeveloperSystem(task),
-            new DeveloperAssistant(task), false)
-        {
 
-        }
     }
+}
 
-    public class DeveloperSystem : Role
+public class DeveloperSystem : Role
+{
+    public DeveloperSystem(string task) : base(RoleType.System, new CustomRoleBehaviour(
+        @$"AI Agent, your task is to generate high-quality, efficient C# code to accomplish the following: {task}"))
     {
-        public DeveloperSystem(string task) : base(RoleType.System, new CustomRoleBehaviour(
-            @$"AI Agent, your task is to generate high-quality, efficient C# code to accomplish the following: {task}"))
-        {
-        }
     }
+}
 
-    public class DeveloperAssistant : Role
-    {
-        public DeveloperAssistant(string task) : base(RoleType.Assistant, new CustomRoleBehaviour(
-            @$"AI Agent, your task is to generate high-quality, efficient C# code to accomplish the following: {task}
+public class DeveloperAssistant : Role
+{
+    public DeveloperAssistant(string task) : base(RoleType.Assistant, new CustomRoleBehaviour(
+        @$"AI Agent, your task is to generate high-quality, efficient C# code to accomplish the following: {task}
 
 Your code should be clear, concise, and fully commented, in accordance with best practices for C# programming. Please ensure to handle any exceptions that may occur and consider edge cases to ensure the robustness of your solution. Include appropriate error handling and logging mechanisms as necessary. Your program should be as modular and reusable as possible.
 
 If you could also provide a brief explanation of your approach and any trade-offs you made, it would be greatly appreciated."))
-        {
-        }
+    {
     }
+}
 ```
 
 Alternatively the RoleBehaviour object can be used to simplify this process into a single prompt that will be used for both System and Agent
