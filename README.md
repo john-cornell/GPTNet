@@ -99,7 +99,7 @@ _gpt = new GPT(configuration["OpenApiKey"], configuration["Model"]);
          
 Developer developer = new Developer("Build a method List of FeeEntities and extracts out 2 HashSet of FeeIds, one that has the FeeEntity.Id of Fees already included in the _cache.Fees Dictionary (Fee Id, FeeEntity), and one of FeeEntity.Ids not in cache" );         
          
-ar developerResponse = await _gpt.Call(developer);
+var developerResponse = await _gpt.Call(developer);
                 
 if (IsError(developerResponse)) return;
 
