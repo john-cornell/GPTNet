@@ -39,7 +39,7 @@ Please visit [Boots](https://github.com/john-cornell/Boots) for a reference impl
 
 Alternatively [GPTAssessorEngine](https://github.com/john-cornell/GPTAssessorEngine) is another fun implementation, using prototype code that was later used in the core of this project, to create a lying lexicographer as a test. Get it to define any nonesense word you wish. Fun for all the family. *That* project, however, is not getting maintained, and was a fairly quick POC so expect it to diverge from this project very quickly. 
 
-In the JC.GPT.NET framework, conversations are the centerpiece of interactions with language models. For successful operation, roles such as 'System' and 'Assistant' need to be established. You can define these roles as Role objects, or use RoleBehaviour for more personalized interactions.
+In the JC.GPT.NET framework, conversations are the centerpiece of interactions with language models. For successful operation, roles such as 'System' and 'Assistant' need to be established. You can define these roles as Role objects, or use RoleBehaviour to combine the two into a single Role.
 
 Start by importing the GPTEngine and GPTEngine.Roles namespaces in your C# code.
 
@@ -48,7 +48,9 @@ using GPTEngine;
 using GPTEngine.Roles;
 ```
 
-You can define a conversation by creating specific roles. A conversation currently requires 2 roles to be defined, System and Assistant. The System will define to goal of the application you are trying to build, while the assistant describes the goals and means of interaction between the LLM and the user. Generally a system role will be a simplified version of the assistant role.
+As mentioned above, you can define a conversation by creating specific roles. 
+
+A conversation currently requires 2 roles to be defined, System and Assistant. The System will define to goal of the application you are trying to build, while the assistant describes the goals and means of interaction between the LLM and the user. Generally a system role will be a simplified version of the assistant role.
 
 Using the [Boots](https://github.com/john-cornell/Boots) example, we can see how a conversation is created for a developer agent's interactions with the model. A system and an assistant role are defined and passed to the developer conversation. Here the `Conversation` object is being used as a base class, however that is not required if you prefer to us Conversation on its own. This was only done to contain the developer Roles in one place.
 
