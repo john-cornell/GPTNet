@@ -99,8 +99,12 @@ _gpt = new GPT(configuration["OpenApiKey"], configuration["Model"]);
          
 Developer developer = new Developer("Build a method List of FeeEntities and extracts out 2 HashSet of FeeIds, one that has the FeeEntity.Id of Fees already included in the _cache.Fees Dictionary (Fee Id, FeeEntity), and one of FeeEntity.Ids not in cache" );         
          
-var response = _gpt.GenerateResponse(developer);
-Console.WriteLine(response.Response);
+ar developerResponse = await _gpt.Call(developer);
+                
+if (IsError(developerResponse)) return;
+
+string developerResponseText = developerResponse.Response;
+... AND SO ON ...
 ```
 
 By default, the whole conversation will be sent to GPT, to conserve context, however an additional constructor parameter can be added to instruct the conversation to only send the given message for the call.
