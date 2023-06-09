@@ -50,33 +50,40 @@ using GPTEngine.Roles;
 
 You can define a conversation by creating specific roles. A conversation currently requires 2 roles to be defined, System and Assistant. The System will define to goal of the application you are trying to build, while the assistant describes the goals and means of interaction between the LLM and the user. Generally a system role will be a simplified version of the assistant role.
 
-For example, a SupervisorAgentSystem role and a SupervisorAgentAssistant role can be defined by extending the Role class. 
+Using the [Boots](https://github.com/john-cornell/Boots) example, we can see how a conversation is created for a developer agent's interactions with the model. A system and an assistant role are defined and passed to the developer conversation. Here the `Conversation` object is being used as a base class, however that is not required if you prefer to us Conversation on its own. This was only done to contain the developer Roles in one place.
+
+```
+public class Developer : Conversation
+    {
+        public Developer(string task) : base(new DeveloperSystem(task),
+            new DeveloperAssistant(task), false)
+        {
+
+        }
+    }
+
+    public class DeveloperSystem : Role
+    {
+        public DeveloperSystem(string task) : base(RoleType.System, new CustomRoleBehaviour(
+            @$"AI Agent, your task is to generate high-quality, efficient C# code to accomplish the following: {task}"))
+        {
+        }
+    }
+
+    public class DeveloperAssistant : Role
+    {
+        public DeveloperAssistant(string task) : base(RoleType.Assistant, new CustomRoleBehaviour(
+            @$"AI Agent, your task is to generate high-quality, efficient C# code to accomplish the following: {task}
+
+Your code should be clear, concise, and fully commented, in accordance with best practices for C# programming. Please ensure to handle any exceptions that may occur and consider edge cases to ensure the robustness of your solution. Include appropriate error handling and logging mechanisms as necessary. Your program should be as modular and reusable as possible.
+
+If you could also provide a brief explanation of your approach and any trade-offs you made, it would be greatly appreciated."))
+        {
+        }
+    }
+```
 
 Alternatively the RoleBehaviour object can be used to simplify this process into a single prompt that will be used for both System and Agent
-
-```csharp
-public class SupervisorAgentAssistant : Role
-{
-    // constructor and behaviour definition
-}
-
-public class SupervisorAgentSystem : Role
-{
-    // constructor and behaviour definition
-}
-```
-
-These roles are then added into a Conversation which the GptChatModel can process.
-
-```csharp
-public class Supervisor : Conversation
-{
-    public Supervisor(string task) : base(new SupervisorAgentSystem(task), new SupervisorAgentAssistant(task), false)
-    {
-
-    }
-}
-```
 
 Generate a response using the GenerateResponse method of the Gpt model.
 
@@ -96,6 +103,9 @@ By default, the whole conversation will be sent to GPT, to conserve context, how
 
 Additionally, the Conversation will fire an `OnMessageAdded` event whenever a new message is added to send, or it receives a response from the GPT engine.
 
+```
+    developer.OnMessageAdded += (sender, args) => { Application.Current.Dispatcher.Invoke(() => { History.Add(BuildGPTMessageFromEvent(args)); }); };
+    supervisor.OnMessageAdded += (sender, args) => { Application.Current.Dispatcher.Invoke(() => { History.Add(BuildGPTMessageFromEvent(args)); }); };```
 
 Please refer to the project's GitHub repository for detailed examples on defining roles and their behaviours.
 
