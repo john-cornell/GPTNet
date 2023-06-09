@@ -53,7 +53,8 @@ IConfiguration configuration = new ConfigurationBuilder()
 
 GPTChat chat = new GPTChat(configuration["OpenApiKey"], configuration["Model"]);
 //Subscribe to OnError for errors, they won't be throw as exceptions as OpenAI can be a bit Error happy in their responses
-var response = await chat.Chat("Hello!");```
+var response = await chat.Chat("Hello!");
+```
 
 If you want more control of your bot, you can easily do that as follows.
 
