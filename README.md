@@ -48,9 +48,9 @@ using GPTEngine;
 using GPTEngine.Roles;
 ```
 
-As mentioned above, you can define a conversation by creating specific roles. 
+As mentioned above, you can define a conversation by creating specific roles. A conversation currently requires 2 roles to be defined, System and Assistant. This reflects the requirements of the OpenAI chat models. 
 
-A conversation currently requires 2 roles to be defined, System and Assistant. The System will define to goal of the application you are trying to build, while the assistant describes the goals and means of interaction between the LLM and the user. Generally a system role will be a simplified version of the assistant role.
+The System will define to goal of the application you are trying to build, while the assistant describes the goals and means of interaction between the LLM and the user. Generally a system role will be a simplified version of the assistant role.
 
 Using the [Boots](https://github.com/john-cornell/Boots) example, we can see how a conversation is created for a developer agent's interactions with the model. A system and an assistant role are defined and passed to the developer conversation. Here the `Conversation` object is being used as a base class, however that is not required if you prefer to us Conversation on its own. This was only done to contain the developer Roles in one place.
 
