@@ -108,6 +108,7 @@ Additionally, the Conversation will fire an `OnMessageAdded` event whenever a ne
 ```csharp
     developer.OnMessageAdded += (sender, args) => { Application.Current.Dispatcher.Invoke(() => { History.Add(BuildGPTMessageFromEvent(args)); }); };
     supervisor.OnMessageAdded += (sender, args) => { Application.Current.Dispatcher.Invoke(() => { History.Add(BuildGPTMessageFromEvent(args)); }); };```
+```
 
 Please refer to the project's GitHub repository for detailed examples on defining roles and their behaviours.
 
