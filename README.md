@@ -124,7 +124,7 @@ Prompt engineering is all about creating effective prompts to elicit desired res
 Prompt engineering techniques tailored to JC.GPT.NET are still in active exploration, given the early stage of the library. Keep an eye out for future updates as I fine-tune optimally utilizing prompt engineering in this library.
 
 ## Contributing
-We warmly welcome contributions to JC.GPT.NET! If you have innovative ideas, bug reports, or feature requests, please don't hesitate to open an issue on the project's GitHub repository. Your feedback and involvement are invaluable to us in enhancing this library.
+I will happily welcome contributions. If you have innovative ideas, bug reports, or feature requests, please don't hesitate to open an issue on the project's GitHub repository. Your feedback and involvement are invaluable to us in enhancing this library.
 
 ## License
 JC.GPT.NET is currently licensed under the GPL-3 License. This choice is intended to discourage the integration of this early-stage software into commercial products. However, as the library evolves, we may shift to a more permissive license. Our primary intention is not to limit the use.
