@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPTEngine.Roles
+namespace GPTNet.Roles
 {
     public enum RoleType { System, Assistant, User }
     internal interface IRole

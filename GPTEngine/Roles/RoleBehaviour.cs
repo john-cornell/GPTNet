@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace GPTEngine.Roles
+namespace GPTNet.Roles
 {
     public abstract class RoleBehaviour
     {
@@ -25,7 +25,7 @@ namespace GPTEngine.Roles
         }
     }
 
-    public class CustomRoleBehaviour: RoleBehaviour
+    public class CustomRoleBehaviour : RoleBehaviour
     {
         private readonly string _name;
         private readonly string _content;

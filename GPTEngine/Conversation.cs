@@ -1,8 +1,8 @@
-﻿using GPTEngine.Roles;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using GPTNet.Events;
+using GPTNet.Roles;
 
-namespace GPTEngine
+namespace GPTNet
 {
     public class Conversation
     {
@@ -15,7 +15,7 @@ namespace GPTEngine
 
         public Conversation(RoleBehaviour role) : this(role.As(RoleType.System), role.As(RoleType.Assistant), role.ResetEachTime)
         {
-            
+
         }
 
         public Conversation(Role system, Role assistant, bool resetConversationEachMessage)
@@ -48,7 +48,7 @@ namespace GPTEngine
         {
             if (_resetConversationEachMessage)
                 ResetMessages();
-            
+
             OnMessageAdded?.Invoke(message, new GPTMessageEventArgs(System.Name, message, GPTMessageEventArgs.MessageDirection.In));
             _messages.Add(new GPTMessage("user", message));
         }

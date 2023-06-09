@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Configuration;
 using System.Text;
 
-namespace GPTEngine
+namespace GPTNet
 {
     public class GPT
     {
@@ -13,14 +13,18 @@ namespace GPTEngine
         private string _apiKey;
 
         HttpClient _httpClient = new HttpClient();
-        public GPT(string apiKey, string model)
+        public GPT(string apiKey, string model) : this(apiKey, model, null) { }
+        /// <summary>
+        /// Injecting httpClient for testing purposes, though feel free to use your own :)
+        /// </summary>
+        public GPT(string apiKey, string model, HttpClient httpClient)
         {
             _apiUrl = "https://api.openai.com/v1/chat/completions";
             _apiKey = apiKey;
             _model = model;
 
             // Set up HttpClient
-            _httpClient = new HttpClient();
+            _httpClient = httpClient ?? new HttpClient();
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "Architext");
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPTEngine
+namespace GPTNet
 {
     public class GPTResponse
     {
         public Conversation Request { get; private set; }
         public bool IsError { get; private set; }
         public string Error { get; private set; }
-        public string Response { get; private set; } 
+        public string Response { get; private set; }
         private GPTResponse(Conversation request, string response, string error)
         {
             Request = request;

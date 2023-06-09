@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GPTEngine.Roles
+namespace GPTNet.Roles
 {
     public class Role : IRole
     {
@@ -21,6 +21,6 @@ namespace GPTEngine.Roles
 
         public RoleType RoleType { get; }
 
-        public GPTMessage GetSetupMessage() => new GPTMessage(this.RoleType.ToString().ToLowerInvariant(), Content);
+        public GPTMessage GetSetupMessage() => new GPTMessage(RoleType.ToString().ToLowerInvariant(), Content);
     }
 }
