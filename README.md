@@ -78,18 +78,24 @@ public class Supervisor : Conversation
 }
 ```
 
-Generate a response using the GenerateResponse method of the GptChatModel.
+Generate a response using the GenerateResponse method of the Gpt model.
+
+```csharp
+IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+_gpt = new GPT(configuration["OpenApiKey"], configuration["Model"]);
+            
+var response = _gpt.GenerateResponse(conversation);
+Console.WriteLine(response);
+```
 
 By default, the whole conversation will be sent to GPT, to conserve context, however an additional constructor parameter can be added to instruct the conversation to only send the given message for the call.
 
 Additionally, the Conversation will fire an `OnMessageAdded` event whenever a new message is added to send, or it receives a response from the GPT engine.
 
-```csharp
-var response = chatModel.GenerateResponse(conversation);
-Console.WriteLine(response);
-```
-
-We're working on introducing a simpler chat engine in future JC.GPT.NET versions. This engine will use pre-set roles to simplify setup and streamline the integration of language models into your applications.
 
 Please refer to the project's GitHub repository for detailed examples on defining roles and their behaviours.
 
