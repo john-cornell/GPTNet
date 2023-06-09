@@ -8,7 +8,7 @@ As fun as python is to code in, the aim of GPT.NET to assist developers in conve
 
 Please understand it is still in its very early stages, however, both the codebase and this documentation actively being built and maintained. 
 
-Please feel free to contribute any way you feel you wish
+Please feel free to contribute any way you feel you wish.
 
 ## Table of Contents
 - [Introduction](#introduction)
