@@ -21,7 +21,7 @@ namespace GPTNet.Tests
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            GPTChat chat = new GPTChat(configuration["OpenApiKey"], configuration["Model"]); ;
+            GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["Model"]); ;
 
             chat.OnError += (sender, e) =>
             {
