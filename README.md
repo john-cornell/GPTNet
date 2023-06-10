@@ -35,6 +35,10 @@ dotnet add package JC.GPT.NET
 
 ## Usage
 
+*Note* Below is documentation for latest 1.0.5 nuget package, though this is now in the process of being deprectated
+Code will remain backwards compliant (except for some namespace references) however GPTApiFactory.Get<GPTApiType> or Get(GPTApiType.Type) should be called in later version.
+This documentation will be updated when the new Nuget package is pushed
+
 Please visit [Boots](https://github.com/john-cornell/Boots) for a reference implementation project that I will endeavour to keep up to date
 
 Alternatively [GPTAssessorEngine](https://github.com/john-cornell/GPTAssessorEngine) is another fun implementation, using prototype code that was later used in the core of this project, to create a lying lexicographer as a test. Get it to define any nonesense word you wish. Fun for all the family. *That* project, however, is not getting maintained, and was a fairly quick POC so expect it to diverge from this project very quickly. 
