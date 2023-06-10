@@ -11,7 +11,7 @@ namespace GPTNet.Tests
     public class GPTChatTests
     {
         //Not guaranteed to work all the time, as OpenAI may throw error, just a test harness, hence commented out attribute
-        //[Test]
+        [Test]
         public async Task ChatEntryTestHarness()
         {
             bool error = false;

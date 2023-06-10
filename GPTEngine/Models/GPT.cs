@@ -4,8 +4,9 @@ using System.Net.Http.Headers;
 using System.Configuration;
 using System.Text;
 
-namespace GPTNet
+namespace GPTNet.Models
 {
+    [Obsolete("Use GPTAPIProvider to retrieve API Wrappers")]
     public class GPT
     {
         private string _apiUrl;
