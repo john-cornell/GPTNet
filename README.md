@@ -60,7 +60,7 @@ IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-GPTChat chat = new GPTChat(configuration["OpenApiKey"], configuration["Model"]);
+GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["Model"]);
 //Subscribe to OnError for errors, they won't be throw as exceptions as OpenAI can be a bit Error happy in their responses
 var response = await chat.Chat("Hello!");
 ```
