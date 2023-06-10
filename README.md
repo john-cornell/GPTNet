@@ -39,6 +39,25 @@ Please visit [Boots](https://github.com/john-cornell/Boots) for a reference impl
 
 Alternatively [GPTAssessorEngine](https://github.com/john-cornell/GPTAssessorEngine) is another fun implementation, using prototype code that was later used in the core of this project, to create a lying lexicographer as a test. Get it to define any nonesense word you wish. Fun for all the family. *That* project, however, is not getting maintained, and was a fairly quick POC so expect it to diverge from this project very quickly. 
 
+A simple `GPTChat` class to start has been provided if you want a simple chat bot with no further instructions, all you need to do is to add an appsettings to you project, and pass model and key details to the ctor of GPTChat.
+
+```csharp
+//Requires nuget 
+//Microsoft.Extensions.Configuration.FileExtensions and 
+//Microsoft.Extensions.Configuration.Json
+
+IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+GPTChat chat = new GPTChat(configuration["OpenApiKey"], configuration["Model"]);
+//Subscribe to OnError for errors, they won't be throw as exceptions as OpenAI can be a bit Error happy in their responses
+var response = await chat.Chat("Hello!");
+```
+
+If you want more control of your bot, you can easily do that as follows.
+
 In the JC.GPT.NET framework, conversations are the centerpiece of interactions with language models. For successful operation, roles such as 'System' and 'Assistant' need to be established. You can define these roles as Role objects, or use RoleBehaviour to combine the two into a single Role.
 
 Start by importing the GPTEngine and GPTEngine.Roles namespaces in your C# code.
@@ -90,6 +109,9 @@ Alternatively the RoleBehaviour object can be used to simplify this process into
 Generate a response using the GenerateResponse method of the Gpt model.
 
 ```csharp
+//Requires nuget 
+//Microsoft.Extensions.Configuration.FileExtensions and 
+//Microsoft.Extensions.Configuration.Json
 IConfiguration configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
@@ -128,3 +150,10 @@ I will happily welcome contributions. If you have innovative ideas, bug reports,
 
 ## License
 JC.GPT.NET is currently licensed under the GPL-3 License. This choice is intended to discourage the integration of this early-stage software into commercial products. However, as the library evolves, we may shift to a more permissive license. Our primary intention is not to limit the use.
+
+## Next Steps
+* Handle more models, open source, huggingface
+* Token counting
+* History trimming and summarisation
+* Add prompt strategies
+* Embeddings
