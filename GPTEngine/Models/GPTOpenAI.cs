@@ -16,6 +16,7 @@ namespace GPTNet.Models
             GPTApiType.OpenAI, "https://api.openai.com/v1/chat/completions")
         {
             _model = model;
+            ValidateParameters(apiKey, model);
 
             // Set up HttpClient
             HttpClient = httpClient ?? new HttpClient();

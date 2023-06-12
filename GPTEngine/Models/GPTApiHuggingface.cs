@@ -25,7 +25,10 @@ namespace GPTNet.Models
 
             // Serialize chat messages with the model property
             var settings = GetJsonSerializerSettings();
-            string jsonPayload = JsonConvert.SerializeObject(new { inputs = $"Human: {request.Data} Bot:", max_new_tokens = 25 }, settings);
+
+            string[] inputs = request.Data.Select(d => $"{d.Role}: {d.Content}").ToArray();
+
+            string jsonPayload = JsonConvert.SerializeObject(new { inputs = inputs, max_new_tokens = 1000 }, settings);
 
             // Send the request
             HttpContent content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");

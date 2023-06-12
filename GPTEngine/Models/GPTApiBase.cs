@@ -22,6 +22,12 @@ namespace GPTNet.Models
             ApiType = apiType;
         }
 
+        protected void ValidateParameters(string apiKey, string model)
+        {
+            apiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
+            model = model ?? throw new ArgumentNullException(nameof(model));
+        }
+
         public GPTApiType ApiType { get; }
         public abstract Task<GPTResponse> Call(Conversation request);
 

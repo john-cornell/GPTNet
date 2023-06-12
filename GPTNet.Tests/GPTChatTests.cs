@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPTNet.Models;
 
 namespace GPTNet.Tests
 {
@@ -21,7 +22,7 @@ namespace GPTNet.Tests
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            GPTChat chat = new GPTChat(configuration["OpenApiKey"], configuration["Model"]); ;
+            GPTChat chat = new GPTChat(configuration["HFApiKey"], configuration["Model"], GPTApiType.Huggingface); ;
 
             chat.OnError += (sender, e) =>
             {
