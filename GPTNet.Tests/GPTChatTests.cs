@@ -22,7 +22,9 @@ namespace GPTNet.Tests
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            GPTChat chat = new GPTChat(configuration["HFApiKey"], configuration["Model"], GPTApiType.Huggingface); ;
+            //GPTChat chat = new GPTChat(configuration["OpenApiKey"], configuration["Model"]);
+            //Tested against microsoft/DialoGPT-medium
+            GPTChat chat = new GPTChat(configuration["HFApiKey"], configuration["Model"], GPTApiType.Huggingface);
 
             chat.OnError += (sender, e) =>
             {

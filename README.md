@@ -34,6 +34,15 @@ dotnet add package JC.GPT.NET
 ```
 
 ## Usage
+----
+**Note** 
+
+Below is documentation for latest 1.0.5 nuget package, though this is now in the process of being deprectated
+Code will remain backwards compliant (except for some namespace references) however if you are using this latest code in this repository, or in later versions, `GPTApiFactory.Get<GPTApiType>` or `Get(GPTApiType.Type)` should be called.
+
+This has been done to introduce wrappers for other LLM APIs. Documentation will be updated when the new Nuget package is pushed
+
+----
 
 Please visit [Boots](https://github.com/john-cornell/Boots) for a reference implementation project that I will endeavour to keep up to date
 
@@ -51,7 +60,7 @@ IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-GPTChat chat = new GPTChat(configuration["OpenApiKey"], configuration["Model"]);
+GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["Model"]);
 //Subscribe to OnError for errors, they won't be throw as exceptions as OpenAI can be a bit Error happy in their responses
 var response = await chat.Chat("Hello!");
 ```
