@@ -2,9 +2,10 @@
 using GPTNet.Events;
 using GPTNet.Roles;
 
-namespace GPTNet
+namespace GPTNet.Conversations
 {
-    public class Conversation
+    [Obsolete("Use GPTConversationFactory to provide the required GPTConversation")]
+    public class Conversation : IConversation
     {
         public event EventHandler<GPTMessageEventArgs>? OnMessageAdded;
 
@@ -12,11 +13,6 @@ namespace GPTNet
         bool _resetConversationEachMessage;
         public Role System { get; private set; }
         public Role Assistant { get; private set; }
-
-        public Conversation(RoleBehaviour role) : this(role.As(RoleType.System), role.As(RoleType.Assistant), role.ResetEachTime)
-        {
-
-        }
 
         public Conversation(Role system, Role assistant, bool resetConversationEachMessage)
         {
@@ -49,17 +45,17 @@ namespace GPTNet
             if (_resetConversationEachMessage)
                 ResetMessages();
 
-            OnMessageAdded?.Invoke(message, new GPTMessageEventArgs(System.Name, message, GPTMessageEventArgs.MessageDirection.In));
+            OnMessageAdded?.Invoke(message, new GPTMessageEventArgs("user", message, GPTMessageEventArgs.MessageDirection.In));
             _messages.Add(new GPTMessage("user", message));
         }
 
         public void AddReplyFromGPT(string message)
         {
-            OnMessageAdded?.Invoke(message, new GPTMessageEventArgs(System.Name, message, GPTMessageEventArgs.MessageDirection.Out));
+            OnMessageAdded?.Invoke(message, new GPTMessageEventArgs("assistant", message, GPTMessageEventArgs.MessageDirection.Out));
             _messages.Add(new GPTMessage("assistant", message));
         }
 
-        public GPTMessage[] Data => _messages.ToArray();
+        public object[] Data => _messages.Select(d => $"{d.Role}: {d.Content}").ToArray();
     }
 
 }

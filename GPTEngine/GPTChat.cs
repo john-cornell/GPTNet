@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GPTNet.Conversations;
+using GPTNet.Conversations.Factory;
 using GPTNet.Events;
 using GPTNet.Models;
 using GPTNet.Roles;
@@ -15,19 +17,27 @@ namespace GPTNet
         public event EventHandler<GPTErrorEventArgs> OnError;
 
         private readonly IGPTApi _gpt;
-        private readonly Role _system;
-        private readonly Role _assistant;
+        
+        private readonly GPTConversation _conversation;
 
-        private readonly Conversation _conversation;
-
-        public GPTChat(string apiKey, string model, GPTApiType type = GPTApiType.OpenAI)
+        public GPTChat(string apiKey, string model) : this(apiKey, model, GPTApiType.OpenAI)
         {
-            _system = new Role(RoleType.System, new CustomRoleBehaviour("This system is a simple chat interface for users to talk to the AI"));
-            _assistant = new Role(RoleType.Assistant, new CustomRoleBehaviour("This assistant is a simple chat bot for users to talk to the AI. Be friendly, be funny, be helpful and don't say anything to upset. I know you'll be great :)"));
+        }
 
-            _conversation = new Conversation(_system, _assistant, false);
-
+        public GPTChat(string apiKey, string model, GPTApiType type)
+        {
             _gpt = new GPTApiFactory().GetApi(type, apiKey, model);
+            _conversation = new GPTConversationFactory().Create(_gpt.ConversationType, false);
+            _conversation.ActiveRole.Content =
+                "This assistant is a simple chat bot for users to talk to the AI. Be friendly, be funny, be helpful and don't say anything to upset. I know you'll be great :)";
+            
+            //Simply for OpenAI Chat system, which carries a lot of weight
+            IRole systemRole = _conversation
+                .Roles
+                .Where(r=>r.Description == RoleType.System.Value)
+                .FirstOrDefault();
+
+            if (systemRole != null) systemRole.Content = "This system is a simple chat interface for users to talk to the AI";
         }
 
         public async Task<GPTResponse> Chat(string message)

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GPTNet.Models;
+using GPTNet.Conversations;
+using NUnit.Framework.Internal;
 
 namespace GPTNet.Tests
 {
@@ -22,8 +24,6 @@ namespace GPTNet.Tests
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            //GPTChat chat = new GPTChat(configuration["OpenApiKey"], configuration["Model"]);
-            //Tested against microsoft/DialoGPT-medium
             GPTChat chat = new GPTChat(configuration["HFApiKey"], configuration["Model"], GPTApiType.Huggingface);
 
             chat.OnError += (sender, e) =>
@@ -33,12 +33,17 @@ namespace GPTNet.Tests
             };
 
             var response = await chat.Chat("Hello!");
-            await Task.Delay(1000);
+            Console.WriteLine(response.Response);
+            await Task.Delay(100);
             response = await chat.Chat("Don't mind me, this is just a test ...");
-            await Task.Delay(1000);
+            Console.WriteLine(response.Response);
+            await Task.Delay(100);
             response = await chat.Chat("Testing Testing 123 ...");
-            await Task.Delay(1000);
+            Console.WriteLine(response.Response);
+            await Task.Delay(100);
             response = await chat.Chat("Test completed. Please carry on.");
+            await Task.Delay(100);
+            Console.WriteLine(response.Response);
 
             Assert.IsFalse(error);
         }

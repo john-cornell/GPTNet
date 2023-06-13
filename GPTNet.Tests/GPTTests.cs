@@ -4,6 +4,7 @@ using GPTNet.Models;
 using GPTNet.Roles;
 using Moq;
 using Moq.Protected;
+using GPTNet.Conversations;
 
 namespace GPTNet.Tests
 {
@@ -87,8 +88,8 @@ namespace GPTNet.Tests
         private static Conversation GetConversation()
         {
             return new Conversation(
-                new Role(RoleType.System, new CustomRoleBehaviour("")),
-                new Role(RoleType.Assistant, new CustomRoleBehaviour("")), false);
+                new Role(RoleType.System),
+                new Role(RoleType.Assistant), false);
         }
     }
 }

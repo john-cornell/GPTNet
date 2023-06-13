@@ -3,6 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
 using System.Configuration;
 using System.Text;
+using GPTNet.Conversations;
 
 namespace GPTNet.Models
 {

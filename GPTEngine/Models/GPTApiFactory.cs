@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,19 +13,26 @@ namespace GPTNet.Models
     public class GPTApiFactory
     {
         Dictionary<Type, IGPTApi> _apis = new Dictionary<Type, IGPTApi>();
+        private Dictionary<string, Func<string, string, IGPTApi>> _byType;
 
         public GPTApiFactory()
         {
-            
+            LoadBuilderDictionary();
         }
+
+
 
         public IGPTApi GetApi(GPTApiType type, string apiKey, string model)
         {
-            return type switch
+            return _byType[type.Value](apiKey, model);
+        }
+
+        private void LoadBuilderDictionary()
+        {
+            _byType = new Dictionary<string, Func<string, string, IGPTApi>>
             {
-                GPTApiType.Huggingface => GetApi<GPTApiHuggingface>(apiKey, model),
-                GPTApiType.OpenAI => GetApi<GPTOpenAI>(apiKey, model),
-                _ => throw new NotImplementedException()
+                ["openai"] = (key, model) => GetApi<GPTOpenAI>(key, model),
+                ["huggingface"] = (key, model) => new GPTApiHuggingface(key, model)
             };
         }
 

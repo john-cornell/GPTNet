@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GPTNet.Conversations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace GPTNet.Models
     public interface IGPTApi
     {
         GPTApiType ApiType { get; }
-        Task<GPTResponse> Call(Conversation request);
+        GPTConversationType ConversationType { get; }
+        Task<GPTResponse> Call(GPTConversation request);
         JsonSerializerSettings GetJsonSerializerSettings();
     }
 
