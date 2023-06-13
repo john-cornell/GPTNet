@@ -28,7 +28,6 @@ namespace GPTNet.Models
         JsonConvert.SerializeObject(new { inputs = request.Data, max_new_tokens = 1000 }, settings);
 
 
-        public override string GetAssistantReply(dynamic response) => response[0].generated_text;
-
+        public override string GetAssistantReply(dynamic response) => response.generated_text;
     }
 }

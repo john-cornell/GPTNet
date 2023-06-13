@@ -84,7 +84,12 @@ namespace GPTNet.Conversations
 
             foreach (var role in Roles)
             {
-                if (!role.IsUserRole) _messages.Add(role.GetSetupMessage());
+                if (!role.IsUserRole)
+                {
+                    GPTMessage? message = role.GetSetupMessage();
+
+                    if (message != null) _messages.Add(message);
+                }
             }
         }
 

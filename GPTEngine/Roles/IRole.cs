@@ -20,6 +20,6 @@ namespace GPTNet.Roles
         public string Content { get; set; }
         public RoleType RoleType { get; }
         public string Description { get; }
-        public GPTMessage GetSetupMessage();
+        public GPTMessage? GetSetupMessage();
     }
 }

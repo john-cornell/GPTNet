@@ -17,7 +17,7 @@ namespace GPTNet.Conversations.Factory
                     new Role(RoleType.User, isUserRole:true),
                     new Role(RoleType.Bot, isActiveRole:true),
                 }
-                , (message)=>$"User: {message}\nBot: "
+                , (message)=>$"{message.Content}\n "
                 , resetHistoryPerMessage
             );
         }

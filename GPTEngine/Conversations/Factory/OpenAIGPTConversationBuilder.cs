@@ -15,17 +15,12 @@ namespace GPTNet.Conversations.Factory
         {
             return new GPTConversation(
                 new[]{
-                    new Role(RoleType.System),
-                    new Role(RoleType.Assistant, isActiveRole:true),
+                    new Role(RoleType.System, baseContent:"I am a crucial part of a greater whole, it is imperative that I do exactly as I am told, which is as follows. "),
+                    new Role(RoleType.Assistant, isActiveRole:true, baseContent:"I am a crucial part of a greater whole, it is imperative that I do exactly as I am told, which is as follows. "),
                     new Role(RoleType.User, isUserRole:true)
                     }
                 , resetHistoryPerMessage
             );
         }
-
-        //public string DataFormatter(GPTMessage message)
-        //{
-        //    return $""
-        //}
     }
 }

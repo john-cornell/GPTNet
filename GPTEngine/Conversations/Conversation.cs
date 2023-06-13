@@ -36,8 +36,17 @@ namespace GPTNet.Conversations
 
         private void ResetMessages()
         {
-            _messages = new List<GPTMessage>() { System.GetSetupMessage() };
-            if (_messages[0].Content != Assistant.GetSetupMessage().Content) _messages.Add(Assistant.GetSetupMessage());
+            _messages = new List<GPTMessage>();
+
+            if (System != null)
+            {
+                var message = System.GetSetupMessage();
+                if (message != null)
+                    _messages.Add(message);
+            }
+            if (
+                _messages.Count > 0 &&
+                _messages[0].Content != Assistant.GetSetupMessage().Content) _messages.Add(Assistant.GetSetupMessage());
         }
 
         public void AddMessage(string message)

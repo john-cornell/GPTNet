@@ -27,10 +27,13 @@ namespace GPTNet
         public GPTChat(string apiKey, string model, GPTApiType type)
         {
             _gpt = new GPTApiFactory().GetApi(type, apiKey, model);
-            _conversation = new GPTConversationFactory().Create(_gpt.ConversationType, false);
-            _conversation.ActiveRole.Content =
-                "This assistant is a simple chat bot for users to talk to the AI. Be friendly, be funny, be helpful and don't say anything to upset. I know you'll be great :)";
-            
+            _conversation = new GPTConversationFactory().Create(_gpt.ConversationType, true);
+            //_conversation.ActiveRole.Content =
+            //    "This assistant is a simple chat bot for users to talk to the AI. Be friendly, be funny, be helpful and don't say anything to upset. I know you'll be great :)";
+
+            //_conversation.ActiveRole.Content =
+            //    "Please continue this conversation as a simple helpful chat bot.";
+
             //Simply for OpenAI Chat system, which carries a lot of weight
             IRole systemRole = _conversation
                 .Roles
