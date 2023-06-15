@@ -109,6 +109,9 @@ namespace GPTNet.Conversations
         }
 
         public object[] Data => _messages.Select(d => _dataFormatter(d)).ToArray();
+        public decimal Temperature { get; set; }
+        public int MaxTokens { get; set; }
+
         public void Dispose()
         {
             Roles?.ForEach(r => r.PropertyChanged -= Role_PropertyChanged);

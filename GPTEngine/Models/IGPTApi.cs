@@ -15,6 +15,8 @@ namespace GPTNet.Models
         GPTConversationType ConversationType { get; }
         Task<GPTResponse> Call(GPTConversation request);
         JsonSerializerSettings GetJsonSerializerSettings();
+
+        GPTConversation GenerateConversation(bool resetConversationEveryMessage, decimal temperature);
     }
 
 }

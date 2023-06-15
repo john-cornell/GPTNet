@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Configuration;
 using System.Text;
 using GPTNet.Conversations;
+using Newtonsoft.Json.Linq;
 
 namespace GPTNet.Models
 {
@@ -22,12 +23,35 @@ namespace GPTNet.Models
         public override GPTConversationType ConversationType => GPTConversationType.UserBot;
 
         public override string GetJsonPayload(
-            GPTConversation request, 
-            JsonSerializerSettings settings, 
-            params Tuple<string, object>[] additionalParameters) => 
+            GPTConversation request,
+            JsonSerializerSettings settings,
+            params Tuple<string, object>[] additionalParameters) =>
         JsonConvert.SerializeObject(new { inputs = request.Data, max_new_tokens = 1000 }, settings);
 
 
-        public override string GetAssistantReply(dynamic response) => response.generated_text;
+
+        public override string GetAssistantReply(dynamic response)
+        {
+            if (response is JArray)
+            {
+                if (response.Count > 0)
+                {
+                    JArray responses = (JArray)response;
+                    dynamic lastResponse = responses.Last;
+                    return lastResponse.generated_text;
+                }
+                else return "Unable to access reply";
+            }
+            else
+            {
+                // response is an object
+                return response.generated_text;
+            }
+        }
+
+        public override GPTConversation GenerateConversation(bool resetConversationEveryMessage, decimal temperature)
+        {
+            return InternalGenerateConversation(resetConversationEveryMessage, temperature, 1000);
+        }
     }
 }

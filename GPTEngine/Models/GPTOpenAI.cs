@@ -40,5 +40,10 @@ namespace GPTNet.Models
                 }
             };
         }
+
+        public override GPTConversation GenerateConversation(bool resetConversationEveryMessage, decimal temperature)
+        {
+            return InternalGenerateConversation(resetConversationEveryMessage, temperature, 4000);
+        }
     }
 }

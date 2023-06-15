@@ -20,8 +20,6 @@ namespace GPTNet.Models
             LoadBuilderDictionary();
         }
 
-
-
         public IGPTApi GetApi(GPTApiType type, string apiKey, string model)
         {
             return _byType[type.Value](apiKey, model);

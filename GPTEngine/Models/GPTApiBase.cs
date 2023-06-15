@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Reflection;
 using GPTNet.Conversations;
+using GPTNet.Conversations.Factory;
 
 namespace GPTNet.Models
 {
@@ -85,6 +86,18 @@ namespace GPTNet.Models
                     NamingStrategy = new CamelCaseNamingStrategy()
                 }
             };
+        }
+
+        public abstract GPTConversation GenerateConversation(bool resetConversationEveryMessage,  decimal temperature);
+
+        protected GPTConversation InternalGenerateConversation(bool resetConversationEveryMessage, decimal temperature, int maxTokens)
+        {
+            GPTConversation conversation = new GPTConversationFactory().Create(ConversationType, resetConversationEveryMessage);
+
+            conversation.Temperature = temperature;
+            conversation.MaxTokens = maxTokens;
+
+            return conversation;
         }
     }
 }

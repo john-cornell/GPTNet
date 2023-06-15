@@ -65,6 +65,11 @@ namespace GPTNet.Conversations
         }
 
         public object[] Data => _messages.Select(d => $"{d.Role}: {d.Content}").ToArray();
+        /// <summary>
+        /// These are not implemented as this class is Obsoleted
+        /// </summary>
+        public decimal Temperature { get; set; } = 0.7m;
+        public int MaxTokens { get; set; } = 4000;
     }
 
 }

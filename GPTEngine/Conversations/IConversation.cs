@@ -14,5 +14,8 @@ namespace GPTNet.Conversations
         void AddMessage(string message);
         void AddReplyFromGPT(string message);
         object[] Data { get; }
+
+        decimal Temperature { get; set; }
+        int MaxTokens { get; set; }
     }
 }
