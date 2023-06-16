@@ -1,11 +1,14 @@
 # GPTNet - Simple GPT Chatbot
 ##Introduction
+
 C# wrapper for Large Language Models, currently OpenAI and Huggingface, with Anthropic Claude coming soon. This repository will be kept up to date, and contributions are welcome.
 
 ##Components 
+
 The library currently employs the following main components:
 
 ###Simple GPTChat bot
+
 The GPTChat class provides a simple interface for chatting with GPT models from OpenAI or Huggingface. You instantiate it by passing the required API keys and model names, then call Chat() to send a message and get a response.
 
 ###GPT instances & Conversations
