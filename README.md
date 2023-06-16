@@ -37,7 +37,7 @@ using GPTNet;
 
 Use appsettings.json to store API keys and models:
 
-```
+```json
 {
   "ApiKey": "your-openai-key",
   "Model": "curie",  
@@ -49,7 +49,7 @@ Use appsettings.json to store API keys and models:
 ## GPTChat
 The GPTChat class provides a simple bot interface. Initialize with your OpenAI or Huggingface info:
 
-```
+```csharp
 // OpenAI       
 GPTChat chat = new GPTChat(Configuration["ApiKey"], Configuration["Model"]);        
 
@@ -63,7 +63,7 @@ chat = new GPTChat(Configuration["HFApiKey"], Configuration["HFModel"], GPTApiTy
 * OnError - Fires if there is an error calling the API. Use to handle errors gracefully.
 Then call Chat() and get a response:
 
-```
+```csharp
 var response = await chat.Chat("Hello! How are you?");        
 Console.WriteLine(response.Response);        
 // Prints "I'm doing well, thanks for asking!"   
@@ -72,7 +72,7 @@ Console.WriteLine(response.Response);
 ## Advanced - GPTApi, Conversations and ConversationFactory
 
 For more control, use the GPTApiFactory to generate an API instance, then generate a Conversation from that to communicate. Conversations can be configured to remove history on each message, though keeps it by default.
-```
+```csharp
 IGPTApi openai = new GPTApiFactory().GetApi<GPTOpenAI>(Configuration["ApiKey"], Configuration["Model"]);
  var conversation = openai.GenerateConversation(false); 
 ```
