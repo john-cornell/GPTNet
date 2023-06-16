@@ -29,6 +29,8 @@ namespace GPTNet
             _gpt = new GPTApiFactory().GetApi(type, apiKey, model);
             _conversation = _gpt.GenerateConversation(false, temperature);
             
+            _conversation.OnMessageAdded += (sender, args) => OnMessage?.Invoke(this, args);
+
             IRole systemRole = _conversation
                 .Roles
                 .Where(r=>r.Description == RoleType.System.Value)
