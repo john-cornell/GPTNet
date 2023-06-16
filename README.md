@@ -29,7 +29,7 @@ OnError
 ## API
 
 To get started, install the NuGet package GPTNet. Then:
-```
+```code csharp
 using GPTNet;  
 ```
 
