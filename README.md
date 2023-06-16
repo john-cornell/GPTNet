@@ -1,168 +1,82 @@
-# JC.GPT.NET
+# GPTNet - Simple GPT Chatbot
+##Introduction
+C# wrapper for Large Language Models, currently OpenAI and Huggingface, with Anthropic Claude coming soon. This repository will be kept up to date, and contributions are welcome.
 
-Welcome to JC.GPT.NET! 
+##Components 
+The library currently employs the following main components:
 
-This is a C# wrapper crafted for language models, at present specifically focusing on OpenAI's chat models, such as `gpt-3.5-turbo`, where specific System, Assistant and User roles are expected, however I plan to extend this to other models and model types in the near future. 
+###Simple GPTChat bot
+The GPTChat class provides a simple interface for chatting with GPT models from OpenAI or Huggingface. You instantiate it by passing the required API keys and model names, then call Chat() to send a message and get a response.
 
-As fun as python is to code in, the aim of GPT.NET to assist developers in conveniently integrating powerful language models into their .NET applications. 
+###GPT instances & Conversations
+GPT instances are created using the GPTApiFactory, by requesting either a GPTOpenAI (for OpenAI models) or GPTApiHuggingface (for Huggingface models) instance.
 
-Please understand it is still in its very early stages, however, both the codebase and this documentation actively being built and maintained. 
+These GPT instances can then generate Conversations, which store the conversation state/history and configuration like temperature. Messages are added to the Conversation, which is then passed to the GPT instance to get a response.
 
-Please feel free to contribute any way you feel you wish.
+Conversations describe the initial prompts for the conversation, and also handle assigning Roles like System, Assistant and User. Conversations can be configured to reset/clear the conversation history on each message, or maintain the full history.
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Prompt Engineering](#prompt-engineering)
-- [Contributing](#contributing)
-- [License](#license)
-- [Next Steps](#next-steps)
+###Events
+GPTChat and Conversations both expose events for:
 
-## Introduction
-JC.GPT.NET is engineered to ease the integration of language models into your C# applications, to take the tedious integration steps out of the way, you can innovate in creating advanced chat-based applications, virtual assistants, and so much more.
+* OnMessage (or OnMessageAdded for Converstaions) 
+    * When a message is sent/received, useful for logging conversations
+OnError 
+    * If there is an error calling the API, so it can be gracefully handled
 
-## Installation
-To get started with JC.GPT.NET in your C# project, you have two options - download the source code and compile it yourself or simply install the library through NuGet.
-
-```bash
-# Install via NuGet
-Install-Package JC.GPT.NET
-
-#or
-dotnet add package JC.GPT.NET
+##API
+To get started, install the NuGet package GPTNet. Then:
+```
+using GPTNet;  
 ```
 
-## Usage
-----
-**Note** 
+##Settings
+Use appsettings.json to store API keys and models:
 
-Below is documentation for latest 1.0.5 nuget package, though this is now in the process of being deprectated
-Code will remain backwards compliant (except for some namespace references) however if you are using this latest code in this repository, or in later versions, `GPTApiFactory.Get<GPTApiType>` or `Get(GPTApiType.Type)` should be called.
-
-This has been done to introduce wrappers for other LLM APIs. Documentation will be updated when the new Nuget package is pushed
-
-----
-
-Please visit [Boots](https://github.com/john-cornell/Boots) for a reference implementation project that I will endeavour to keep up to date
-
-Alternatively [GPTAssessorEngine](https://github.com/john-cornell/GPTAssessorEngine) is another fun implementation, using prototype code that was later used in the core of this project, to create a lying lexicographer as a test. Get it to define any nonesense word you wish. Fun for all the family. *That* project, however, is not getting maintained, and was a fairly quick POC so expect it to diverge from this project very quickly. 
-
-A simple `GPTChat` class to start has been provided if you want a simple chat bot with no further instructions, all you need to do is to add an appsettings to you project, and pass model and key details to the ctor of GPTChat.
-
-```csharp
-//Requires nuget 
-//Microsoft.Extensions.Configuration.FileExtensions and 
-//Microsoft.Extensions.Configuration.Json
-
-IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["Model"]);
-//Subscribe to OnError for errors, they won't be throw as exceptions as OpenAI can be a bit Error happy in their responses
-var response = await chat.Chat("Hello!");
 ```
-
-If you want more control of your bot, you can easily do that as follows.
-
-In the JC.GPT.NET framework, conversations are the centerpiece of interactions with language models. For successful operation, roles such as 'System' and 'Assistant' need to be established. You can define these roles as Role objects, or use RoleBehaviour to combine the two into a single Role.
-
-Start by importing the GPTEngine and GPTEngine.Roles namespaces in your C# code.
-
-```csharp
-using GPTEngine;
-using GPTEngine.Roles;
-```
-
-As mentioned above, you can define a conversation by creating specific roles. A conversation currently requires 2 roles to be defined, System and Assistant. This reflects the requirements of the OpenAI chat models. 
-
-The System will define to goal of the application you are trying to build, while the assistant describes the goals and means of interaction between the LLM and the user. Generally a system role will be a simplified version of the assistant role.
-
-Using the [Boots](https://github.com/john-cornell/Boots) example, we can see how a conversation is created for a developer agent's interactions with the model. A system and an assistant role are defined and passed to the developer conversation. Here the `Conversation` object is being used as a base class, however that is not required if you prefer to us Conversation on its own. This was only done to contain the developer Roles in one place.
-
-```csharp
-public class Developer : Conversation
 {
-    public Developer(string task) : base(new DeveloperSystem(task),
-        new DeveloperAssistant(task), false)
-    {
-
-    }
-}
-
-public class DeveloperSystem : Role
-{
-    public DeveloperSystem(string task) : base(RoleType.System, new CustomRoleBehaviour(
-        @$"AI Agent, your task is to generate high-quality, efficient C# code to accomplish the following: {task}"))
-    {
-    }
-}
-
-public class DeveloperAssistant : Role
-{
-    public DeveloperAssistant(string task) : base(RoleType.Assistant, new CustomRoleBehaviour(
-        @$"AI Agent, your task is to generate high-quality, efficient C# code to accomplish the following: {task}
-
-Your code should be clear, concise, and fully commented, in accordance with best practices for C# programming. Please ensure to handle any exceptions that may occur and consider edge cases to ensure the robustness of your solution. Include appropriate error handling and logging mechanisms as necessary. Your program should be as modular and reusable as possible.
-
-If you could also provide a brief explanation of your approach and any trade-offs you made, it would be greatly appreciated."))
-    {
-    }
-}
+  "ApiKey": "your-openai-key",
+  "Model": "curie",  
+  "HFAPIKey": "your-huggingface-key",     
+  "HFModel": "distilbert-base-cased"  
+}     
 ```
 
-Alternatively the RoleBehaviour object can be used to simplify this process into a single prompt that will be used for both System and Agent
+##GPTChat
+The GPTChat class provides a simple bot interface. Initialize with your OpenAI or Huggingface info:
 
-Generate a response using the GenerateResponse method of the Gpt model.
+```
+// OpenAI       
+GPTChat chat = new GPTChat(Configuration["ApiKey"], Configuration["Model"]);        
 
-```csharp
-//Requires nuget 
-//Microsoft.Extensions.Configuration.FileExtensions and 
-//Microsoft.Extensions.Configuration.Json
-IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-_gpt = new GPT(configuration["OpenApiKey"], configuration["Model"]);
-         
-Developer developer = new Developer("Build a method List of FeeEntities and extracts out 2 HashSet of FeeIds, one that has the FeeEntity.Id of Fees already included in the _cache.Fees Dictionary (Fee Id, FeeEntity), and one of FeeEntity.Ids not in cache" );         
-         
-var developerResponse = await _gpt.Call(developer);
-                
-if (IsError(developerResponse)) return;
-
-string developerResponseText = developerResponse.Response;
-... AND SO ON ...
+// Huggingface   
+chat = new GPTChat(Configuration["HFApiKey"], Configuration["HFModel"], GPTApiType.Huggingface);   
 ```
 
-By default, the whole conversation will be sent to GPT, to conserve context, however an additional constructor parameter can be added to instruct the conversation to only send the given message for the call.
+##GPTChat exposes events:
 
-Additionally, the Conversation will fire an `OnMessageAdded` event whenever a new message is added to send, or it receives a response from the GPT engine.
+* OnMessage - Fires when a message is sent/received. Use to log the conversation.
+* OnError - Fires if there is an error calling the API. Use to handle errors gracefully.
+Then call Chat() and get a response:
 
-```csharp
-    developer.OnMessageAdded += (sender, args) => { Application.Current.Dispatcher.Invoke(() => { History.Add(BuildGPTMessageFromEvent(args)); }); };
-    supervisor.OnMessageAdded += (sender, args) => { Application.Current.Dispatcher.Invoke(() => { History.Add(BuildGPTMessageFromEvent(args)); }); };```
+```
+var response = await chat.Chat("Hello! How are you?");        
+Console.WriteLine(response.Response);        
+// Prints "I'm doing well, thanks for asking!"   
 ```
 
-Please refer to the project's GitHub repository for detailed examples on defining roles and their behaviours.
+##Advanced - GPTApi, Conversations and ConversationFactory
 
-## Prompt Engineering
-Prompt engineering is all about creating effective prompts to elicit desired responses from language models. JC.GPT.NET allows you to experiment with different prompt engineering strategies to enhance user experiences and customize the model's responses to specific scenarios.
+For more control, use the GPTApiFactory to generate an API instance, then generate a Conversation from that to communicate. Conversations can be configured to remove history on each message, though keeps it by default.
+```
+IGPTApi openai = new GPTApiFactory().GetApi<GPTOpenAI>(Configuration["ApiKey"], Configuration["Model"]);
+ var conversation = openai.GenerateConversation(false); 
+```
 
-Prompt engineering techniques tailored to JC.GPT.NET are still in active exploration, given the early stage of the library. Keep an eye out for future updates as I fine-tune optimally utilizing prompt engineering in this library.
+Conversations expose 
+* `OnMessageAdded` and allow setting `Temperature` (0-1) to control randomness and `MaxTokens` for longer responses.
 
-## Contributing
-I will happily welcome contributions. If you have innovative ideas, bug reports, or feature requests, please don't hesitate to open an issue on the project's GitHub repository. Your feedback and involvement are invaluable to us in enhancing this library.
-
-## License
-JC.GPT.NET is currently licensed under the GPL-3 License. This choice is intended to discourage the integration of this early-stage software into commercial products. However, as the library evolves, we may shift to a more permissive license. Our primary intention is not to limit the use.
-
-## Next Steps
-* Handle more models, open source, huggingface
-* Token counting
-* History trimming and summarisation
-* Add prompt strategies
-* Embeddings
+##Future steps
+Prompt templates and types (build from data, chain of thought, tree of thought)
+Claude integration
+New OpenAI functions
+For questions or to contribute, email john at johncornell dot org
