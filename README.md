@@ -58,7 +58,7 @@ GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["35Model"]);
 ```
 
 ## GPTApiProperties
-`ChatGPT` ctors and `GPTApiFactory` calls now recommend passing a `GPTApiProperties` class to hold details, rather than send properties down as individual parameters. This has been done to simplify things as the Anthropic model required a modelVersion property, and I wanted to avoid paramter blow out. 
+`ChatGPT` ctors and `GPTApiFactory` calls now recommend passing a `GPTApiProperties` class to hold details, rather than send properties down as individual parameters. This has been done to simplify things as the Anthropic model required a modelVersion property, and I wanted to avoid parameter blow out. 
 
 Please use these methods and ctors where available, as I won't necessarily be updating the others if new parameters are required for later models, or I add top_p and top_k and other finetuning.
 
