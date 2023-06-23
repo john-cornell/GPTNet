@@ -72,8 +72,18 @@ Console.WriteLine(response.Response);
 ## Advanced - GPTApi, Conversations and ConversationFactory
 
 For more control, use the GPTApiFactory to generate an API instance, then generate a Conversation from that to communicate. Conversations can be configured to remove history on each message, though keeps it by default.
+
+The `GPTChat` and `GPTChatTests` may be used as examples of working code, and will be kept updated as they are the test harnesses I use to ensure everything runs fine
+
 ```csharp
-IGPTApi openai = new GPTApiFactory().GetApi<GPTOpenAI>(Configuration["ApiKey"], Configuration["Model"]);
+GPTApiProperties properties = GPTApiProperties.Create<GPTApiAnthropic>(
+                configuration["AApiKey"], configuration["AModel"], configuration["AModelVersion"]); //Given Anthropic data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and tempature may also be passed
+                
+_gptApi = new GPTApiFactory().GetApi(properties);            
+```
+The `GPTApiProperties` object has now obseleted the follow, which will still work for backwards compatibility, however I can't guarentee I will remember to always update this (I will do my best) for later models
+```csharp
+IGPTApi openai = new GPTApiFactory().GetApi<GPTOpenAI>(Configuration["ApiKey"], Configuration["Model"]);//HttpClient (mainly used for tests), modelVersion (Anthropic requirement) and temperature can also be optionally passed
  var conversation = openai.GenerateConversation(false); 
 ```
 
