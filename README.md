@@ -50,7 +50,8 @@ Use appsettings.json to store API keys and models:
 The GPTChat class provides a simple bot interface. Initialize with your OpenAI or Huggingface info:
 
 ```csharp
-//OpenAI - This now uses GPTApiOpenAI class. GPTOpenAI still exists for backwards compat, but renamed a new class to keep to standards. 
+//OpenAI - This now uses GPTApiOpenAI class. 
+//GPTOpenAI still exists for backwards compat, but renamed a new class to keep to standards. 
 //Please use GPTApiOpenAI as  I can't guarentee I will remember to always update GPTOpenAI (I will do my best) for later changes
 GPTApiProperties properties = GPTApiProperties.Create<GPTApiOpenAI>(
                 configuration["ApiKey"], configuration["Model"]); //Given OpenAI data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and temperature may also be passed
