@@ -8,13 +8,12 @@ using GPTNet.Conversations;
 
 namespace GPTNet.Models
 {
-    [Obsolete("Use GPTAPIOpenAI instead")]
-    public class GPTOpenAI : GPTApiBase
+    public class GPTAPIOpenAI : GPTApiBase
     {
         private string _model;
 
-        public GPTOpenAI(string apiKey, string model) : this(apiKey, model, null) { }
-        public GPTOpenAI(string apiKey, string model, HttpClient httpClient) : base(
+        public GPTAPIOpenAI(string apiKey, string model) : this(apiKey, model, null) { }
+        public GPTAPIOpenAI(string apiKey, string model, HttpClient httpClient) : base(
             GPTApiType.OpenAI, "https://api.openai.com/v1/chat/completions")
         {
             _model = model;

@@ -29,8 +29,8 @@ namespace GPTNet.Models
         {
             _byType = new Dictionary<string, Func<string, string, IGPTApi>>
             {
-                ["openai"] = (key, model) => GetApi<GPTOpenAI>(key, model),
-                ["huggingface"] = (key, model) => new GPTApiHuggingface(key, model)
+                ["openai"] = (key, model) => GetApi<GPTAPIOpenAI>(key, model),
+                ["huggingface"] = (key, model) => GetApi<GPTApiHuggingface>(key, model)
             };
         }
 
