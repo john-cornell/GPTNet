@@ -9,10 +9,10 @@ The library currently employs the following main components:
 
 ### Simple GPTChat bot
 
-The GPTChat class provides a simple interface for chatting with GPT models from OpenAI or Huggingface. You instantiate it by passing the required API keys and model names, then call Chat() to send a message and get a response.
+The GPTChat class provides a simple interface for chatting with GPT models from OpenAI, Anthropic or Huggingface. You instantiate it by passing the required API keys and model names, then call Chat() to send a message and get a response.
 
 ### GPT instances & Conversations
-GPT instances are created using the GPTApiFactory, by requesting either a GPTOpenAI (for OpenAI models) or GPTApiHuggingface (for Huggingface models) instance.
+GPT instances are created using the GPTApiFactory, by requesting either a GPTApiOpenAI (for OpenAI models), GPTApiAnthropic (for Anthropic Claude models) or GPTApiHuggingface (for Huggingface inference endpoint models) instance.
 
 These GPT instances can then generate Conversations, which store the conversation state/history and configuration like temperature. Messages are added to the Conversation, which is then passed to the GPT instance to get a response.
 
