@@ -1,7 +1,7 @@
 # GPTNet - Simple GPT Chatbot
 ## Introduction
 
-C# wrapper for Large Language Models, currently OpenAI and Huggingface, with Anthropic Claude coming soon. This repository will be kept up to date, and contributions are welcome.
+C# wrapper for Large Language Models, currently OpenAI, Anthropic Claude and Huggingface models via the Huggingface inference endpoint. This repository will be kept up to date, and contributions are welcome.
 
 ## Components 
 
