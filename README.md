@@ -54,7 +54,7 @@ IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["35Model"]);
+GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["35Model"]);
 ```
 
 ## GPTApiProperties
