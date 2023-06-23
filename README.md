@@ -1,4 +1,4 @@
-# GPTNet - Simple GPT Chatbot
+# GPT.Net - Simple GPT Chatbot
 ## Introduction
 
 GPT.Net is a C# wrapper for Large Language Model APIs, currently supporting OpenAI GPT models, Anthropic Claude models and Huggingface models via the Huggingface inference endpoint. This repository will be kept up to date, and contributions are welcome.
