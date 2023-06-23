@@ -122,7 +122,7 @@ Conversations expose
 * `OnMessageAdded` and allow setting `Temperature` (0-1) to control randomness and `MaxTokens` for longer responses.
 
 ## Future steps
-Prompt templates and types (build from data, chain of thought, tree of thought)
-Claude integration
-New OpenAI functions
+* Prompt templates and types (build from data, chain of thought, tree of thought)
+* New OpenAI functions
+
 For questions or to contribute, email john at johncornell dot org
