@@ -128,9 +128,10 @@ The `GPTApiProperties` object has now obseleted the following, which will still 
 IGPTApi openai = new GPTApiFactory().GetApi<GPTOpenAI>(Configuration["ApiKey"], Configuration["Model"]);//HttpClient (mainly used for tests), modelVersion (Anthropic requirement) and temperature can also be optionally passed
  var conversation = openai.GenerateConversation(false); 
 ```
-
-Conversations expose 
-* `OnMessageAdded` and allow setting `Temperature` (0-1) to control randomness and `MaxTokens` for longer responses.
+### Conversation events and settings
+* `OnMessageAdded` event
+* `Temperature` (0-1) to control randomness
+* `MaxTokens` for longer responses.
 
 ## Future steps
 * Prompt templates and types (build from data, chain of thought, tree of thought)
