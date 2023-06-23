@@ -46,6 +46,17 @@ To protect API keys it is recommended to store these in a config file such as ap
 }     
 ```
 
+These can then be simply retrieved, and used in code like as follows:
+
+```csharp
+IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["35Model"]);
+```
+
 ## GPTApiProperties
 `ChatGPT` ctors and `GPTApiFactory` calls now recommend passing a `GPTApiProperties` class to hold details, rather than send properties down as individual parameters. This has been done to simplify things as the Anthropic model required a modelVersion property, and I wanted to avoid paramter blow out. 
 
