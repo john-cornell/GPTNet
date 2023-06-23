@@ -50,6 +50,24 @@ Use appsettings.json to store API keys and models:
 The GPTChat class provides a simple bot interface. Initialize with your OpenAI or Huggingface info:
 
 ```csharp
+//OpenAI - This now uses GPTApiOpenAI class. GPTOpenAI still exists for backwards compat, but renamed a new class to keep to standards. 
+//Please use GPTApiOpenAI as  I can't guarentee I will remember to always update GPTOpenAI (I will do my best) for later changes
+GPTApiProperties properties = GPTApiProperties.Create<GPTApiOpenAI>(
+                configuration["ApiKey"], configuration["Model"]); //Given OpenAI data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and temperature may also be passed
+                
+//Anthropic
+GPTApiProperties properties = GPTApiProperties.Create<GPTApiAnthropic>(
+                configuration["ApiKey"], configuration["Model"], configuration["ModelVersion"]); //Given Anthropic data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and temperature may also be passed
+
+//Huggingface
+GPTApiProperties properties = GPTApiProperties.Create<GPTApiHuggingface>(
+                configuration["ApiKey"], configuration["Model"]); //Given Anthropic data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and temperature may also be passed
+
+//Get Chat
+GPTChat chat = new GPTChat(properties)
+
+The `GPTApiProperties` object has now obseleted the following ctors, which will still work for backwards compatibility, however I can't guarentee I will remember to always update this (I will do my best) for later models
+```csharp
 // OpenAI       
 GPTChat chat = new GPTChat(Configuration["ApiKey"], Configuration["Model"]);        
 
@@ -76,12 +94,22 @@ For more control, use the GPTApiFactory to generate an API instance, then genera
 The `GPTChat` and `GPTChatTests` may be used as examples of working code, and will be kept updated as they are the test harnesses I use to ensure everything runs fine
 
 ```csharp
+//OpenAI - This now uses GPTApiOpenAI class. GPTOpenAI still exists for backwards compat, but renamed a new class to keep to standards. 
+//Please use GPTApiOpenAI as  I can't guarentee I will remember to always update GPTOpenAI (I will do my best) for later changes
+GPTApiProperties properties = GPTApiProperties.Create<GPTApiOpenAI>(
+                configuration["ApiKey"], configuration["Model"]); //Given OpenAI data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and temperature may also be passed
+                
+//Anthropic
 GPTApiProperties properties = GPTApiProperties.Create<GPTApiAnthropic>(
-                configuration["AApiKey"], configuration["AModel"], configuration["AModelVersion"]); //Given Anthropic data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and tempature may also be passed
+                configuration["ApiKey"], configuration["Model"], configuration["ModelVersion"]); //Given Anthropic data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and temperature may also be passed
+
+//Huggingface
+GPTApiProperties properties = GPTApiProperties.Create<GPTApiHuggingface>(
+                configuration["ApiKey"], configuration["Model"]); //Given Anthropic data is in appsettings.json as with these keys. modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and temperature may also be passed
                 
 _gptApi = new GPTApiFactory().GetApi(properties);            
 ```
-The `GPTApiProperties` object has now obseleted the follow, which will still work for backwards compatibility, however I can't guarentee I will remember to always update this (I will do my best) for later models
+The `GPTApiProperties` object has now obseleted the following, which will still work for backwards compatibility, however I can't guarentee I will remember to always update this (I will do my best) for later models
 ```csharp
 IGPTApi openai = new GPTApiFactory().GetApi<GPTOpenAI>(Configuration["ApiKey"], Configuration["Model"]);//HttpClient (mainly used for tests), modelVersion (Anthropic requirement) and temperature can also be optionally passed
  var conversation = openai.GenerateConversation(false); 
