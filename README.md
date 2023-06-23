@@ -35,7 +35,7 @@ using GPTNet;
 
 ## Settings
 
-Use appsettings.json to store API keys and models:
+To protect API keys it is recommended to store these in a config file such as appsettings.json rather than store them directly in code.
 
 ```json
 {
