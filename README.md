@@ -117,7 +117,7 @@ Console.WriteLine(response.Response);
 
 For more control, use the GPTApiFactory to generate an API instance, then generate a Conversation from that to communicate. Conversations can be configured to remove history on each message, though keeps it by default.
 
-The `GPTChat` and `GPTChatTests` may be used as examples of working code, and will be kept updated as they are the test harnesses I use to ensure everything runs fine
+The `GPTChat` and `GPTChatTests` classes may be used as examples of working code, and will be kept updated as they are the test harnesses I use to ensure everything runs fine
 
 ```
 _gptApi = new GPTApiFactory().GetApi(properties);            
