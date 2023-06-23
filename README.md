@@ -23,7 +23,8 @@ GPTChat and Conversations both expose events for:
 
 * OnMessage (or OnMessageAdded for Conversations) 
     * When a message is sent/received, useful for logging conversations
-OnError 
+
+* OnError 
     * If there is an error calling the API, so it can be gracefully handled
 
 ## API
