@@ -17,31 +17,38 @@ namespace GPTNet
         public event EventHandler<GPTErrorEventArgs> OnError;
 
         private readonly IGPTApi _gpt;
-        
+
         private readonly GPTConversation _conversation;
 
-        public GPTChat(string apiKey, string model, decimal temperature = 0.7m) : this(apiKey, model, GPTApiType.OpenAI)
+        public GPTChat(string apiKey, string model, decimal temperature = 0.7m) : this(apiKey, model, GPTApiType.OpenAI, temperature: temperature)
         {
         }
 
-        public GPTChat(string apiKey, string model, GPTApiType type, decimal temperature = 0.7m)
+        public GPTChat(string apiKey, string model, GPTApiType type, string modelVersion = null, decimal temperature = 0.7m) : this(
+            GPTApiProperties.Create(type, apiKey, model, null, null, temperature)
+            )
         {
-            _gpt = new GPTApiFactory().GetApi(type, apiKey, model);
-            _conversation = _gpt.GenerateConversation(false, temperature);
-            
+        }
+
+        public GPTChat(GPTApiProperties properties)
+        {
+            _gpt = new GPTApiFactory().GetApi(properties);
+            _conversation = _gpt.GenerateConversation(properties.ResetConversationEveryMessage, properties.Temperature);
+
             _conversation.OnMessageAdded += (sender, args) => OnMessage?.Invoke(this, args);
 
             IRole systemRole = _conversation
                 .Roles
-                .Where(r=>r.Description == RoleType.System.Value)
+                .Where(r => r.Description == RoleType.System.Value)
                 .FirstOrDefault();
 
-            IRole activeRole = _conversation                .Roles
+            IRole activeRole = _conversation
+                .Roles
                 .Where(r => r.IsActiveRole)
                 .FirstOrDefault();
 
             if (systemRole != null) systemRole.Content = "You are a friendly AI Assistant";
-            if (activeRole != null) activeRole.Content = "You are a friendly AI Assistant";
+            if (activeRole != null) activeRole.Content = "I am a friendly AI Assistant";
         }
 
         public async Task<GPTResponse> Chat(string message)

@@ -15,10 +15,12 @@ namespace GPTNet.Roles
 
         public string Value { get; private set; }
 
-        public static RoleType System => new RoleType("system");
         public static RoleType Assistant => new RoleType("assistant");
-        public static RoleType User => new RoleType("user");
         public static RoleType Bot => new RoleType("bot");
+        public static RoleType Human => new RoleType("human");
+        public static RoleType System => new RoleType("system");
+        public static RoleType User => new RoleType("user");
+
         public static RoleType CustomRole(string roleName)
         {
             return new RoleType(roleName);

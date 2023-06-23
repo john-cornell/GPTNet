@@ -10,12 +10,21 @@ namespace GPTNet.Models
 {
     public class GPTApiHuggingface : GPTApiBase
     {
-        public GPTApiHuggingface(string apiKey, string model) : this(apiKey, model, null) { }
-        public GPTApiHuggingface(string apiKey, string model, HttpClient httpClient) : base(GPTApiType.Huggingface, $"https://api-inference.huggingface.co/models/{model}")
+        [Obsolete("Please use the constructor that takes a GPTApiProperties object instead.")]
+        public GPTApiHuggingface(string apiKey, string model) 
+            : this(GPTApiProperties.Create<GPTApiHuggingface>(apiKey, model)) { }
+
+        [Obsolete("Please use the constructor that takes a GPTApiProperties object instead.")]
+        public GPTApiHuggingface(string apiKey, string model, HttpClient httpClient)
+            : base(GPTApiProperties.Create<GPTApiHuggingface>(apiKey, model, null,httpClient)) { }
+
+        public GPTApiHuggingface(GPTApiProperties properties) : base(properties)
         {
+            ValidateParameters(properties.ApiKey, properties.Model, properties.ApiUrl);
+
             // Set up HttpClient
-            HttpClient = httpClient ?? new HttpClient();
-            HttpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+            HttpClient = properties.HttpClient ?? new HttpClient();
+            HttpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {properties.ApiKey}");
             HttpClient.DefaultRequestHeaders.Add("User-Agent", "HuggingfaceGPT");
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }

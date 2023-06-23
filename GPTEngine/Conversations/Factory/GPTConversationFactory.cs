@@ -15,7 +15,8 @@ namespace GPTNet.Conversations.Factory
             _builders = new Dictionary<GPTConversationType, IGPTConversationBuilder>
             {
                 {GPTConversationType.OpenAI, new OpenAIGPTConversationBuilder()},
-                {GPTConversationType.UserBot, new UserBotGPTConversationBuilder()}
+                {GPTConversationType.UserBot, new UserBotGPTConversationBuilder()},
+                {GPTConversationType.Anthropic, new AnthropicGPTConversationBuilder()}
             };
         }
 

@@ -16,18 +16,28 @@ namespace GPTNet.Models
     public abstract class GPTApiBase : IGPTApi
     {
         protected string ApiUrl { get; private set; }
-        public HttpClient HttpClient { get; protected set; }
+        public HttpClient? HttpClient { get; protected set; }
+        public GPTApiProperties Properties { get; private set; }
 
-        public GPTApiBase(GPTApiType apiType, string apiUrl)
+        protected GPTApiBase(GPTApiProperties properties)
         {
-            ApiUrl = apiUrl;
-            ApiType = apiType;
+            Properties = properties;
+
+            ApiUrl = properties.ApiUrl;
+            ApiType = properties.ApiType;
         }
 
-        protected void ValidateParameters(string apiKey, string model)
+        protected void ValidateParameters(string apiKey, string model, string apiUrl, params (object, string)[] customParameters)
         {
+            apiUrl = apiUrl ?? throw new ArgumentNullException(nameof(apiUrl));
             apiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
             model = model ?? throw new ArgumentNullException(nameof(model));
+
+            foreach (var parameterAndName in customParameters)
+            {
+                if (parameterAndName.Item1 == null)
+                    throw new ArgumentNullException(parameterAndName.Item2);
+            }
         }
 
         public GPTApiType ApiType { get; }

@@ -19,7 +19,7 @@ namespace GPTNet.Models
 
         public static GPTApiType OpenAI => new GPTApiType("openai");
         public static GPTApiType Huggingface => new GPTApiType("huggingface");
-
+        public static GPTApiType Anthropic => new GPTApiType("anthropic");
 
 
         public static GPTApiType CustomRole(string roleName)

@@ -16,6 +16,7 @@ namespace GPTNet.Conversations
 
         public string Value { get; private set; }
 
+        public static GPTConversationType Anthropic => new GPTConversationType("anthropic");
         public static GPTConversationType OpenAI => new GPTConversationType("openai");
         public static GPTConversationType UserBot => new GPTConversationType("userbot");
         

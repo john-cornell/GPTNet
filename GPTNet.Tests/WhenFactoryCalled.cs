@@ -9,7 +9,7 @@ namespace GPTNet.Tests
         public void ForOpenAPI_ByGeneric_ShouldReturnCorrect()
         {
             GPTApiFactory factory = new GPTApiFactory();
-            var api = factory.GetApi<GPTAPIOpenAI>("", "");
+            var api = factory.GetApi<GPTApiOpenAI>("", "");
             Assert.IsTrue(api.ApiType == GPTApiType.OpenAI);
         }
 

@@ -8,20 +8,40 @@ using GPTNet.Conversations;
 
 namespace GPTNet.Models
 {
-    public class GPTAPIOpenAI : GPTApiBase
+    public class GPTApiOpenAI : GPTApiBase
     {
         private string _model;
+        [Obsolete("Please use the constructor that takes a GPTApiProperties object instead.")]
+        public GPTApiOpenAI(string apiKey, string model) : this(
+            new GPTApiProperties
+            {
+                ApiType = GPTApiType.OpenAI,
+                ApiUrl = $"https://api.openai.com/v1/chat/completions",
+                ApiKey = apiKey,
+                Model = model
+            })
+        { }
 
-        public GPTAPIOpenAI(string apiKey, string model) : this(apiKey, model, null) { }
-        public GPTAPIOpenAI(string apiKey, string model, HttpClient httpClient) : base(
-            GPTApiType.OpenAI, "https://api.openai.com/v1/chat/completions")
+        [Obsolete("Please use the constructor that takes a GPTApiProperties object instead.")]
+        public GPTApiOpenAI(string apiKey, string model, HttpClient httpClient) : base(
+            new GPTApiProperties
+            {
+                ApiType = GPTApiType.OpenAI,
+                ApiUrl = $"https://api.openai.com/v1/chat/completions",
+                ApiKey = apiKey,
+                Model = model,
+                HttpClient = httpClient
+            })
         {
-            _model = model;
-            ValidateParameters(apiKey, model);
+        }
+        public GPTApiOpenAI(GPTApiProperties properties) : base(properties)
+        {
+            _model = properties.Model;
+            ValidateParameters(properties.ApiKey, properties.Model, properties.ApiUrl);
 
             // Set up HttpClient
-            HttpClient = httpClient ?? new HttpClient();
-            HttpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
+            HttpClient = properties.HttpClient ?? new HttpClient();
+            HttpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {properties.ApiKey}");
             HttpClient.DefaultRequestHeaders.Add("User-Agent", "Architext");
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
