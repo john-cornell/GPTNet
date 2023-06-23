@@ -21,7 +21,7 @@ Conversations describe the initial prompts for the conversation, and also handle
 ### Events
 GPTChat and Conversations both expose events for:
 
-* OnMessage (or OnMessageAdded for Converstaions) 
+* OnMessage (or OnMessageAdded for Conversations) 
     * When a message is sent/received, useful for logging conversations
 OnError 
     * If there is an error calling the API, so it can be gracefully handled
@@ -33,7 +33,7 @@ To get started, install the NuGet package GPTNet. Then:
 using GPTNet;  
 ```
 
-##Settings
+## Settings
 
 Use appsettings.json to store API keys and models:
 
