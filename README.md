@@ -63,19 +63,20 @@ GPTChat chat = new GPTChat(configuration["ApiKey"], configuration["35Model"]);
 
 Please use these methods and ctors where available, as I won't necessarily be updating the others if new parameters are required for later models, or I add top_p and top_k and other finetuning.
 
+(configuration keys given in the code below are advisory only, it's up to you to define your own, or hardcode data in directly - though this is not recommended for keys if you are planning on using any sort of source control)
+
 ```csharp
-//OpenAI - Given OpenAI data is in appsettings.json as with these keys.
+//OpenAI
 //This now uses GPTApiOpenAI class. 
 GPTApiProperties properties = GPTApiProperties.Create<GPTApiOpenAI>(
                 configuration["ApiKey"], configuration["Model"]); 
                 
-//Anthropic - Given Anthropic data is in appsettings.json as with these keys. 
+//Anthropic
 //modelVersion is used for the Anthropic agent, but currently defaults to "2023-06-01", and temperature may also be passed
-
 GPTApiProperties properties = GPTApiProperties.Create<GPTApiAnthropic>(
                 configuration["ApiKey"], configuration["Model"], configuration["ModelVersion"]); 
                 
-//Huggingface - Given Huggingface data is in appsettings.json as with these keys.
+//Huggingface
 GPTApiProperties properties = GPTApiProperties.Create<GPTApiHuggingface>(
                 configuration["ApiKey"], configuration["Model"]); //and temperature may also be passed
 
