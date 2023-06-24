@@ -66,8 +66,6 @@ Please use these methods and ctors where available, as I won't necessarily be up
 ```csharp
 //OpenAI - Given OpenAI data is in appsettings.json as with these keys.
 //This now uses GPTApiOpenAI class. 
-//GPTOpenAI still exists for backwards compat, but renamed a new class to keep to standards. 
-//Please use GPTApiOpenAI as  I can't guarentee I will remember to always update GPTOpenAI (I will do my best) for later changes
 GPTApiProperties properties = GPTApiProperties.Create<GPTApiOpenAI>(
                 configuration["ApiKey"], configuration["Model"]); 
                 
@@ -76,11 +74,14 @@ GPTApiProperties properties = GPTApiProperties.Create<GPTApiOpenAI>(
 
 GPTApiProperties properties = GPTApiProperties.Create<GPTApiAnthropic>(
                 configuration["ApiKey"], configuration["Model"], configuration["ModelVersion"]); 
+                
 //Huggingface - Given Huggingface data is in appsettings.json as with these keys.
 GPTApiProperties properties = GPTApiProperties.Create<GPTApiHuggingface>(
                 configuration["ApiKey"], configuration["Model"]); //and temperature may also be passed
 
 ```
+
+### Note: GPTOpenAI still exists for backwards compat, but renamed a new class to keep to standards. Please use GPTApiOpenAI as I can't guarentee I will remember to always update GPTOpenAI (I will do my best) for later changes
 
 ## GPTChat
 The GPTChat class provides a simple bot interface. Initialize with your OpenAI or Huggingface info:
