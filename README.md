@@ -81,7 +81,7 @@ GPTApiProperties properties = GPTApiProperties.Create<GPTApiHuggingface>(
 
 ```
 
-### Note: GPTOpenAI still exists for backwards compat, but renamed a new class to keep to standards. Please use GPTApiOpenAI as I can't guarentee I will remember to always update GPTOpenAI (I will do my best) for later changes
+Note: GPTOpenAI still exists for backwards compat, but renamed a new class to keep to standards. Please use GPTApiOpenAI as I can't guarentee I will remember to always update GPTOpenAI (I will do my best) for later changes
 
 ## GPTChat
 The GPTChat class provides a simple bot interface. Initialize with your OpenAI or Huggingface info:
